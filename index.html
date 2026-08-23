@@ -1,485 +1,256 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>NOOB SAIBOT // SYSTEM</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NOOB SAIBOT // SYSTEM BREACH</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{box-sizing:border-box}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+    color:#39ff14;
+    font-family:"Courier New",monospace
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #020202;
-    font-family: "Courier New", monospace;
-    color: #00ff55;
+body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative
 }
 
-/* =========================
-   MAIN SCREEN
-========================= */
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+        0deg,
+        rgba(57,255,20,.035) 0px,
+        rgba(57,255,20,.035) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    z-index:20
 }
 
-/* Scanlines */
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            rgba(255,255,255,0.025) 0px,
-            rgba(255,255,255,0.025) 1px,
-            transparent 1px,
-            transparent 4px
-        );
-
-    z-index: 100;
+body:after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:radial-gradient(
+        ellipse at center,
+        transparent 25%,
+        rgba(0,0,0,.75) 100%
+    );
+    pointer-events:none;
+    z-index:19
 }
 
-/* Dark vignette */
-
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle,
-            transparent 25%,
-            rgba(0,0,0,0.85) 100%
-        );
-
-    z-index: 99;
-}
-
-/* =========================
-   TERMINAL
-========================= */
-
-#terminal {
-    width: min(900px, 92vw);
-    position: relative;
-    z-index: 10;
-}
-
-.header {
-    color: #00ff55;
-    font-size: clamp(13px, 2vw, 18px);
-    margin-bottom: 18px;
-    text-shadow:
-        0 0 5px #00ff55,
-        0 0 15px #00ff55;
-}
-
-.line {
-    margin: 8px 0;
-    font-size: clamp(13px, 2vw, 17px);
-    min-height: 20px;
-}
-
-.green {
-    color: #00ff55;
-}
-
-.red {
-    color: #ff2020;
-}
-
-.white {
-    color: #eee;
-}
-
-.yellow {
-    color: #ffff00;
-}
-
-/* =========================
-   PROGRESS
-========================= */
-
-.progress-wrapper {
-    margin-top: 28px;
-}
-
-.progress-text {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 9px;
-
-    color: #00ff55;
-    font-size: 15px;
-}
-
-.progress-box {
-    width: 100%;
-    height: 24px;
-
-    border: 1px solid #00ff55;
+.screen{
+    width:min(1000px,94%);
+    height:min(700px,90vh);
+    border:1px solid #174d17;
+    background:rgba(0,8,2,.96);
     box-shadow:
-        0 0 5px #00ff55,
-        inset 0 0 10px rgba(0,255,85,0.2);
-
-    padding: 3px;
+        0 0 10px #39ff14,
+        inset 0 0 60px rgba(0,255,50,.06);
+    padding:25px;
+    position:relative;
+    overflow:hidden
 }
 
-#progress {
-    width: 0%;
-    height: 100%;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            #00ff55 0px,
-            #00ff55 8px,
-            #00cc44 8px,
-            #00cc44 12px
-        );
-
-    box-shadow:
-        0 0 8px #00ff55,
-        0 0 20px #00ff55;
-
-    transition: width 0.12s linear;
+.header{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #164d16;
+    padding-bottom:12px;
+    font-size:12px;
+    color:#8aff7a
 }
 
-/* =========================
-   CENTER MESSAGES
-========================= */
-
-#messageScreen {
-    position: fixed;
-    inset: 0;
-
-    display: none;
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: column;
-
-    z-index: 50;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,30,10,0.25),
-            rgba(0,0,0,0.96)
-        );
+.blink{
+    animation:blink .7s infinite
 }
 
-#message {
-    position: relative;
-
-    text-align: center;
-
-    font-size: clamp(25px, 7vw, 70px);
-    font-weight: bold;
-
-    color: #00ff55;
-
+.alert{
+    text-align:center;
+    font-size:clamp(24px,6vw,62px);
+    font-weight:bold;
+    margin:25px 0 8px;
+    color:#ff2525;
     text-shadow:
-        0 0 5px #00ff55,
-        0 0 15px #00ff55,
-        0 0 35px #00ff55;
-
-    animation:
-        glitch 0.12s infinite,
-        flicker 0.7s infinite;
+        0 0 5px red,
+        0 0 15px red,
+        0 0 35px red;
+    animation:glitch 1.4s infinite
 }
 
-/* =========================
-   GLITCH
-========================= */
-
-@keyframes glitch {
-
-    0% {
-        transform: translate(0);
-    }
-
-    20% {
-        transform: translate(-3px, 2px);
-    }
-
-    40% {
-        transform: translate(3px, -2px);
-    }
-
-    60% {
-        transform: translate(-2px, -1px);
-    }
-
-    80% {
-        transform: translate(2px, 1px);
-    }
-
-    100% {
-        transform: translate(0);
-    }
+.sub{
+    text-align:center;
+    font-size:clamp(12px,2vw,18px);
+    color:#fff;
+    letter-spacing:3px
 }
 
-@keyframes flicker {
-
-    0%, 100% {
-        opacity: 1;
-    }
-
-    45% {
-        opacity: 0.65;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    55% {
-        opacity: 0.3;
-    }
-
-    60% {
-        opacity: 1;
-    }
+.name{
+    text-align:center;
+    font-size:clamp(18px,4vw,38px);
+    margin:18px 0 15px;
+    color:#39ff14;
+    text-shadow:0 0 15px #39ff14
 }
 
-/* red glitch flash */
-
-.red-glitch {
-    animation:
-        glitch 0.08s infinite,
-        redFlash 0.3s infinite !important;
+.progress-wrap{
+    margin:15px 0 25px
 }
 
-@keyframes redFlash {
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:7px;
+    font-size:13px;
+    color:#8aff7a
+}
 
-    0%, 100% {
-        color: #00ff55;
+.progress{
+    height:12px;
+    border:1px solid #39ff14;
+    box-shadow:0 0 12px #39ff14;
+    overflow:hidden
+}
 
+.bar{
+    height:100%;
+    width:0%;
+    background:#39ff14;
+    box-shadow:0 0 20px #39ff14;
+    transition:width .08s linear
+}
+
+.percent{
+    color:#39ff14;
+    text-shadow:0 0 8px #39ff14
+}
+
+.terminal{
+    height:260px;
+    overflow:hidden;
+    font-size:12px;
+    line-height:1.65;
+    direction:ltr;
+    text-align:left;
+    color:#62ff46
+}
+
+.line{
+    white-space:nowrap;
+    overflow:hidden;
+    animation:type .15s steps(40,end)
+}
+
+.red{
+    color:#ff3030;
+    text-shadow:0 0 8px red
+}
+
+.white{
+    color:#eee
+}
+
+.success{
+    text-align:center;
+    margin-top:18px;
+    color:#39ff14;
+    font-size:clamp(15px,3vw,25px);
+    font-weight:bold;
+    text-shadow:
+        0 0 5px #39ff14,
+        0 0 15px #39ff14,
+        0 0 30px #39ff14;
+    display:none;
+    animation:successGlow 1s infinite alternate
+}
+
+.bottom{
+    position:absolute;
+    left:25px;
+    right:25px;
+    bottom:20px;
+    border-top:1px solid #164d16;
+    padding-top:10px;
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    color:#397b39
+}
+
+.warning{
+    color:#ff3030;
+    animation:blink .8s infinite
+}
+
+@keyframes blink{
+    0%,45%{opacity:1}
+    46%,100%{opacity:.25}
+}
+
+@keyframes glitch{
+    0%,88%,100%{transform:translate(0)}
+    90%{transform:translate(-5px,2px)}
+    92%{transform:translate(5px,-2px)}
+    94%{transform:translate(-3px,0)}
+}
+
+@keyframes type{
+    from{width:0}
+    to{width:100%}
+}
+
+@keyframes successGlow{
+    from{
+        opacity:.65;
         text-shadow:
-            0 0 5px #00ff55,
-            0 0 20px #00ff55;
+            0 0 5px #39ff14,
+            0 0 12px #39ff14
     }
-
-    50% {
-        color: #ff2020;
-
+    to{
+        opacity:1;
         text-shadow:
-            0 0 5px #ff2020,
-            0 0 25px #ff2020,
-            0 0 50px #ff2020;
+            0 0 5px #39ff14,
+            0 0 20px #39ff14,
+            0 0 35px #39ff14
     }
 }
 
-/* =========================
-   FINAL SCREEN
-========================= */
-
-#finalScreen {
-    position: fixed;
-    inset: 0;
-
-    display: none;
-
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: column;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(0,50,15,0.35),
-            #000 70%
-        );
-
-    z-index: 60;
-
-    text-align: center;
-}
-
-#noobImage {
-    width: min(430px, 78vw);
-    max-height: 55vh;
-
-    object-fit: contain;
-
-    opacity: 0;
-
-    filter:
-        drop-shadow(0 0 8px #00ff55)
-        drop-shadow(0 0 25px #00ff55);
-
-    animation:
-        noobAppear 2s forwards,
-        noobPulse 2.5s 2s infinite;
-}
-
-@keyframes noobAppear {
-
-    from {
-        opacity: 0;
-        transform: scale(0.7);
-        filter:
-            brightness(0)
-            drop-shadow(0 0 0 transparent);
+@media(max-width:600px){
+    .screen{
+        padding:15px
     }
 
-    to {
-        opacity: 1;
-        transform: scale(1);
-        filter:
-            drop-shadow(0 0 8px #00ff55)
-            drop-shadow(0 0 25px #00ff55);
-    }
-}
-
-@keyframes noobPulse {
-
-    0%, 100% {
-        filter:
-            drop-shadow(0 0 8px #00ff55)
-            drop-shadow(0 0 25px #00ff55);
+    .header{
+        font-size:9px
     }
 
-    50% {
-        filter:
-            drop-shadow(0 0 15px #00ff55)
-            drop-shadow(0 0 45px #00ff55);
-    }
-}
-
-.final-title {
-    margin-top: 20px;
-
-    color: #00ff55;
-
-    font-size: clamp(28px, 7vw, 65px);
-    font-weight: bold;
-
-    letter-spacing: 4px;
-
-    text-shadow:
-        0 0 5px #00ff55,
-        0 0 15px #00ff55,
-        0 0 35px #00ff55;
-
-    animation:
-        finalGlitch 0.13s infinite;
-}
-
-.final-arabic {
-    margin-top: 15px;
-
-    color: #ff2020;
-
-    font-size: clamp(18px, 4vw, 34px);
-    font-weight: bold;
-
-    text-shadow:
-        0 0 5px #ff2020,
-        0 0 15px #ff2020,
-        0 0 30px #ff2020;
-
-    direction: rtl;
-
-    animation: finalArabic 1.2s infinite;
-}
-
-@keyframes finalGlitch {
-
-    0% {
-        transform: translate(0);
+    .terminal{
+        font-size:10px;
+        height:245px
     }
 
-    25% {
-        transform: translate(-2px, 1px);
+    .bottom{
+        left:15px;
+        right:15px
     }
 
-    50% {
-        transform: translate(2px, -1px);
-    }
-
-    75% {
-        transform: translate(-1px, -2px);
-    }
-
-    100% {
-        transform: translate(0);
-    }
-}
-
-@keyframes finalArabic {
-
-    0%, 100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.35;
-    }
-}
-
-/* =========================
-   FADE OUT
-========================= */
-
-.fadeOut {
-    animation: fadeAway 3s forwards !important;
-}
-
-@keyframes fadeAway {
-
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    #terminal {
-        width: 90vw;
-    }
-
-    .line {
-        font-size: 12px;
-    }
-
-    .progress-box {
-        height: 20px;
-    }
-
-    #message {
-        padding: 20px;
-    }
-
-    #noobImage {
-        width: 82vw;
+    .progress-info{
+        font-size:10px
     }
 }
 </style>
@@ -487,408 +258,165 @@ body::after {
 
 <body>
 
-<!-- =========================
-     TERMINAL
-========================= -->
-
-<div id="terminal">
+<div class="screen">
 
     <div class="header">
-        [ NOOB SAIBOT // CHAOS SYSTEM ]
+        <span>NOOB-SAIBOT://ROOT_ACCESS</span>
+        <span class="blink">● CONNECTION ACTIVE</span>
     </div>
 
-    <div id="lines"></div>
+    <div class="alert" id="alert">
+        SYSTEM BREACHED
+    </div>
 
-    <div class="progress-wrapper">
+    <div class="sub" id="sub">
+        UNAUTHORIZED ACCESS DETECTED
+    </div>
 
-        <div class="progress-text">
-            <span id="status">INITIALIZING...</span>
-            <span id="percent">0%</span>
+    <div class="name">
+        ༺༽𝑵𝒐𝒐𝒃♕𝑺𝒂𝒊𝒃𝒐𝒕༼༻
+    </div>
+
+    <div class="progress-wrap">
+
+        <div class="progress-info">
+            <span>LOADING SYSTEM...</span>
+            <span class="percent" id="percent">0%</span>
         </div>
 
-        <div class="progress-box">
-            <div id="progress"></div>
+        <div class="progress">
+            <div class="bar" id="bar"></div>
         </div>
 
     </div>
 
-</div>
+    <div class="terminal" id="terminal"></div>
 
-
-<!-- =========================
-     CENTER MESSAGES
-========================= -->
-
-<div id="messageScreen">
-    <div id="message"></div>
-</div>
-
-
-<!-- =========================
-     FINAL NOOB SCREEN
-========================= -->
-
-<div id="finalScreen">
-
-    <!--
-        ضع صورة Noob Saibot التي أرسلتها
-        في نفس مجلد index.html
-        وسمّها:
-
-        noob.png
-    -->
-
-    <img
-        id="noobImage"
-        src="noob.png"
-        alt="Noob Saibot"
-    >
-
-    <div class="final-title">
-        HACKED SUCCESSFULLY
+    <div class="success" id="success">
+        Haxked Successfully By: Noob Saibot
     </div>
 
-    <div class="final-arabic">
-        تم قرصنتك بنجاح يا ڪ*سمك
+    <div class="bottom">
+        <span>ENCRYPTION: <b>DISABLED</b></span>
+        <span class="warning">⚠ SECURITY FAILURE</span>
     </div>
 
 </div>
-
 
 <script>
 
-/* =========================================
-   ELEMENTS
-========================================= */
-
 const terminal = document.getElementById("terminal");
-const lines = document.getElementById("lines");
-
-const progress = document.getElementById("progress");
+const bar = document.getElementById("bar");
 const percent = document.getElementById("percent");
-const status = document.getElementById("status");
-
-const messageScreen =
-    document.getElementById("messageScreen");
-
-const message =
-    document.getElementById("message");
-
-const finalScreen =
-    document.getElementById("finalScreen");
-
-
-/* =========================================
-   TERMINAL LINES
-========================================= */
-
-const terminalLines = [
-
-    "[+] Establishing secure connection...",
-    "[+] Initializing NOOB SAIBOT protocol...",
-    "[+] Scanning target system...",
-    "[+] Searching active processes...",
-    "[+] Analyzing system environment...",
-    "[+] Loading encrypted modules...",
-    "[+] Injecting CHAOS protocol...",
-    "[+] Bypassing security layer...",
-    "[+] Establishing remote channel...",
-    "[+] Preparing final sequence..."
-
-];
-
-let lineIndex = 0;
-
-
-/* =========================================
-   TYPE TERMINAL TEXT
-========================================= */
-
-function typeLine(text) {
-
-    return new Promise(resolve => {
-
-        const line = document.createElement("div");
-
-        line.className = "line green";
-
-        lines.appendChild(line);
-
-        let i = 0;
-
-        const interval = setInterval(() => {
-
-            line.textContent += text[i];
-
-            i++;
-
-            if (i >= text.length) {
-
-                clearInterval(interval);
-
-                resolve();
-            }
-
-        }, 10);
-
-    });
-
-}
-
-
-/* =========================================
-   LOAD TERMINAL
-========================================= */
-
-async function loadTerminal() {
-
-    for (const text of terminalLines) {
-
-        await typeLine(text);
-
-        await sleep(90);
-    }
-
-}
-
-
-/* =========================================
-   SLEEP
-========================================= */
-
-function sleep(ms) {
-
-    return new Promise(resolve =>
-        setTimeout(resolve, ms)
-    );
-
-}
-
-
-/* =========================================
-   PROGRESS
-========================================= */
-
-async function startProgress() {
-
-    /*
-        التحميل إلى 99%
-        بسرعة واقعية
-    */
-
-    for (let i = 0; i <= 99; i++) {
-
-        progress.style.width = i + "%";
-
-        percent.textContent = i + "%";
-
-        if (i < 25) {
-
-            status.textContent =
-                "INITIALIZING...";
-
-        } else if (i < 50) {
-
-            status.textContent =
-                "SCANNING...";
-
-        } else if (i < 75) {
-
-            status.textContent =
-                "PROCESSING...";
-
-        } else {
-
-            status.textContent =
-                "UPLOADING...";
-        }
-
-        await sleep(
-            i < 80 ? 35 : 55
-        );
-    }
-
-
-    /*
-        التوقف عند 99%
-        لمدة 5 ثوان
-    */
-
-    status.textContent =
-        "FINALIZING...";
-
-    await sleep(5000);
-
-
-    /*
-        100%
-    */
-
-    progress.style.width = "100%";
-
-    percent.textContent = "100%";
-
-    status.textContent =
-        "COMPLETE";
-
-    await sleep(900);
-
-}
-
-
-/* =========================================
-   MESSAGE SEQUENCE
-========================================= */
+const success = document.getElementById("success");
+const alertText = document.getElementById("alert");
+const sub = document.getElementById("sub");
 
 const messages = [
-
-    {
-        text: "HACKED SUCCESSFULLY",
-        className: "green"
-    },
-
-    {
-        text: "VIRUS UPLOADED",
-        className: "red"
-    },
-
-    {
-        text: "تم قرصنتك بنجاح يا ڪ*سمك",
-        className: "red"
-    }
-
+    ["[+] Initializing Noob Saibot protocol...",""],
+    ["[+] Establishing secure channel...",""],
+    ["[+] Authentication bypass detected.","red"],
+    ["[+] Root access requested...",""],
+    ["[+] Access level: SYSTEM","white"],
+    ["[+] Firewall status: BYPASSED","red"],
+    ["[+] Security layer: DISABLED","red"],
+    ["[+] Scanning system environment...",""],
+    ["[+] Device node detected.",""],
+    ["[+] System directories indexed.",""],
+    ["[+] User environment located.",""],
+    ["[+] Encryption keys detected.","red"],
+    ["[+] Privilege escalation: SUCCESS","red"],
+    ["[+] Kernel access: GRANTED","red"],
+    ["[+] Uploading Noob Saibot signature...",""],
+    ["[+] Shadow protocol activated.",""],
+    ["[!] SYSTEM CONTROL: 100%","red"],
+    ["[!] ALL SECURITY SERVICES TERMINATED","red"],
+    ["[+] Finalizing access...",""],
+    ["[+] Connection established.","white"]
 ];
 
+let i = 0;
 
-/* =========================================
-   SHOW MESSAGE
-========================================= */
+function addLine(){
 
-async function showMessage(item) {
+    if(i >= messages.length) return;
 
-    message.textContent = item.text;
+    const line = document.createElement("div");
 
-    message.className = "";
+    line.className = "line " + messages[i][1];
 
-    if (item.className === "red") {
+    line.textContent = messages[i][0];
 
-        message.classList.add("red-glitch");
+    terminal.appendChild(line);
 
-    }
+    terminal.scrollTop = terminal.scrollHeight;
 
-    messageScreen.style.display = "flex";
+    i++;
 
-    /*
-        الرسالة تظهر
-    */
-
-    await sleep(1700);
-
-    /*
-        تختفي
-    */
-
-    messageScreen.style.display = "none";
-
-    await sleep(500);
-
+    setTimeout(
+        addLine,
+        250 + Math.random() * 500
+    );
 }
 
+setTimeout(addLine,500);
 
-/* =========================================
-   MESSAGE CYCLE
-========================================= */
 
-async function runMessages() {
+// ==============================
+// PROGRESS SYSTEM
+// ==============================
 
-    /*
-        الجولة الأولى
-    */
+let current = 0;
 
-    for (const item of messages) {
+function updateProgress(){
 
-        await showMessage(item);
+    if(current < 99){
 
+        current++;
+
+        bar.style.width = current + "%";
+        percent.textContent = current + "%";
+
+        // سرعة التحميل
+        setTimeout(updateProgress,65);
+
+    }else{
+
+        // توقف عند 99%
+        current = 99;
+
+        bar.style.width = "99%";
+        percent.textContent = "99%";
+
+        sub.textContent = "DEVICE CONTROL ACQUIRED";
+
+        // انتظار 5 ثوانٍ عند 99%
+        setTimeout(() => {
+
+            current = 100;
+
+            bar.style.width = "100%";
+            percent.textContent = "100%";
+
+            alertText.textContent = "ACCESS GRANTED";
+
+            success.style.display = "block";
+
+            sub.textContent = "SYSTEM ACCESS COMPLETED";
+
+        },5000);
     }
-
-
-    /*
-        الجولة الثانية
-    */
-
-    await sleep(500);
-
-    for (const item of messages) {
-
-        await showMessage(item);
-
-    }
-
-
-    /*
-        الجولة الثالثة
-    */
-
-    await sleep(500);
-
-    for (const item of messages) {
-
-        await showMessage(item);
-
-    }
-
 }
 
-
-/* =========================================
-   FINAL SCREEN
-========================================= */
-
-async function showFinal() {
-
-    terminal.style.display = "none";
-
-    finalScreen.style.display = "flex";
-
-    await sleep(7000);
-
-    /*
-        اختفاء تدريجي
-    */
-
-    finalScreen.classList.add("fadeOut");
-
-}
+setTimeout(updateProgress,500);
 
 
-/* =========================================
-   MAIN SEQUENCE
-========================================= */
-
-async function start() {
-
-    await loadTerminal();
-
-    await startProgress();
-
-    await sleep(700);
-
-    await runMessages();
-
-    await sleep(800);
-
-    await showFinal();
-
-}
-
-
-/* =========================================
-   START
-========================================= */
-
-start();
+// تغيير النص أثناء التحميل
+setTimeout(() => {
+    sub.textContent = "DEVICE CONTROL ACQUIRED";
+},5200);
 
 </script>
 
 </body>
-        </html>
+      </html>
