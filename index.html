@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متصمم بحب ❤️</title>
+    <title>𝑴؁𝑨𝑫𝑶 & 𝓢𝓱𝓸𝓢𝓱𝓸</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            background: linear-gradient(135deg, #1a001a, #4a0033, #000000);
+            background: radial-gradient(circle at center, #1f051b 0%, #0d010c 60%, #000000 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -19,65 +20,319 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
             color: #fff;
+            position: relative;
         }
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 105, 180, 0.3);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            max-width: 500px;
-            width: 90%;
-            animation: fadeIn 2s ease-in-out;
+
+        /* شاشة التحميل الرومانسية */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0c0010, #22001b);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease, visibility 1s ease;
         }
-        .heart {
-            font-size: 50px;
+
+        .loader-heart {
+            font-size: 60px;
             color: #ff3366;
-            animation: pulse 1.5s infinite;
+            animation: loaderPulse 1.2s infinite alternate;
             margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(255, 51, 102, 0.7));
         }
-        h1 {
-            font-size: 24px;
-            color: #ff99bb;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 153, 187, 0.5);
-        }
-        .names {
+
+        .loader-text {
             font-size: 22px;
+            color: #ffb3d1;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .progress-bar-container {
+            width: 280px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff3366, #ff99bb, #ffffff);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+
+        .percentage {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ff99bb;
+            font-weight: bold;
+        }
+
+        @keyframes loaderPulse {
+            0% { transform: scale(0.9); text-shadow: 0 0 10px rgba(255,51,102,0.5); }
+            100% { transform: scale(1.15); text-shadow: 0 0 30px rgba(255,51,102,0.9); }
+        }
+
+        /* الخلفية المضيئة والقلوب المتطايرة */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 1;
+            opacity: 0.4;
+            animation: floatOrb 10s infinite alternate ease-in-out;
+        }
+
+        .orb1 {
+            width: 300px;
+            height: 300px;
+            background: #ff1a66;
+            top: -50px;
+            left: -50px;
+        }
+
+        .orb2 {
+            width: 350px;
+            height: 350px;
+            background: #9900cc;
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 40px) scale(1.2); }
+        }
+
+        /* البطاقة الرئيسية */
+        .card {
+            background: rgba(25, 5, 25, 0.65);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 153, 187, 0.35);
+            padding: 40px 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 51, 102, 0.2);
+            max-width: 550px;
+            width: 90%;
+            z-index: 10;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* القلب التفاعلي في المنتصف */
+        .interactive-heart {
+            font-size: 70px;
+            color: #ff3366;
+            cursor: pointer;
+            user-select: none;
+            display: inline-block;
+            animation: heartBeat 1.5s infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 51, 102, 0.8));
+            transition: transform 0.2s ease;
+            margin-bottom: 15px;
+        }
+
+        .interactive-heart:hover {
+            transform: scale(1.2);
+        }
+
+        .interactive-heart:active {
+            transform: scale(0.9);
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.25); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 20px;
+            color: #ffb3d1;
+            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 10px rgba(255, 179, 209, 0.5);
+        }
+
+        /* تنسيق الاسم بدقة كما طلبت */
+        .names {
+            font-size: 24px;
             font-weight: bold;
             color: #ffffff;
-            background: linear-gradient(45deg, #ff3366, #ff99bb, #ffffff);
+            background: linear-gradient(45deg, #ff3366, #ff99bb, #ffffff, #ff99bb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-top: 10px;
+            margin: 20px 0;
             line-height: 1.8;
-            padding: 10px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.2);
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+            padding: 15px 10px;
+            border-top: 1px dashed rgba(255, 153, 187, 0.3);
+            border-bottom: 1px dashed rgba(255, 153, 187, 0.3);
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 20px rgba(255, 51, 102, 0.4);
+            direction: ltr;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+
+        /* رسالة التفاعل */
+        #love-message {
+            font-size: 15px;
+            color: #ff99bb;
+            min-height: 25px;
+            margin: 15px 0 10px 0;
+            font-weight: 500;
+            text-shadow: 0 0 8px rgba(255, 153, 187, 0.4);
+        }
+
+        /* التوقيع بخط صغير تحت خالص */
+        .footer-credit {
+            margin-top: 25px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.5px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 12px;
+        }
+
+        /* تأثير القلوب الصغيرة العائمة عند الضغط */
+        .floating-heart {
+            position: absolute;
+            color: #ff3366;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: floatUp 1.2s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.6);
+                opacity: 1;
             }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            100% {
+                transform: translateY(-120px) scale(1.4);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="heart">❤️</div>
-        <h1>عالم يجمعنا بحب وذوق راقي</h1>
+    <!-- شاشة التحميل -->
+    <div id="loader">
+        <div class="loader-heart">❤️</div>
+        <div class="loader-text">جاري تحميل الحب والذوق الراقي...</div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="percentage" id="percentage">0%</div>
+    </div>
+
+    <!-- أضواء الخلفية المتاخمة -->
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+
+    <!-- البطاقة الرئيسية -->
+    <div class="card" id="mainCard">
+        <h1>عالم يجمعنا بحب وذوق راقي ومتناسق</h1>
+        
+        <!-- القلب التفاعلي -->
+        <div class="interactive-heart" id="mainHeart" title="اضغط هنا للحب!">💖</div>
+
+        <!-- الاسم بالتقسيم والزخرفة المطلوبة -->
         <div class="names">
             𝑴؁𝑨𝑫𝑶 ♥ 『★』𝓢𝓱𝓸𝓢𝓱𝓸『★』
         </div>
+
+        <div id="love-message">اضغط على القلب لتشعر بجمال اللحظة ✨</div>
+
+        <!-- التوقيع المطلوب -->
+        <div class="footer-credit">
+            هدية من أخوك ༺༽𝑵𝒐𝒐𝒃 𝑺𝒂𝒊𝒃𝒐𝒕༼༻
+        </div>
     </div>
 
+    <script>
+        let progress = 0;
+        const progressBar = document.getElementById('progressBar');
+        const percentageText = document.getElementById('percentage');
+        const loader = document.getElementById('loader');
+        const mainCard = document.getElementById('mainCard');
+
+        const loadingInterval = setInterval(() => {
+            progress += Math.floor(Math.random() * 8) + 3;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(loadingInterval);
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    mainCard.classList.add('show');
+                }, 1000);
+            }
+            progressBar.style.width = progress + '%';
+            percentageText.innerText = progress + '%';
+        }, 50);
+
+        const mainHeart = document.getElementById('mainHeart');
+        const loveMessage = document.getElementById('loveMessage');
+        
+        const messages = [
+            "حب حقيقي يجمع بين القلوب الأرقى والأجمل! ❤️",
+            "أجمل الأقدار جمعت بينكم في أروع قصة ✨",
+            "سعادة أبدية وراحة بال، وذوق عالي ما لوش مثيل 🌹",
+            "نبضات قلب تنطق بالمحبة والصفاء 💖",
+            "الله يديم المحبة والجمال بينكم يا غاليين 💫"
+        ];
+
+        mainHeart.addEventListener('click', function(e) {
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            loveMessage.innerText = randomMsg;
+
+            for (let i = 0; i < 5; i++) {
+                createFloatingHeart(e.clientX, e.clientY);
+            }
+        });
+
+        function createFloatingHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = ['❤️', '💖', '✨', '💕'][Math.floor(Math.random() * 4)];
+            
+            const offsetX = (Math.random() - 0.5) * 60;
+            const offsetY = (Math.random() - 0.5) * 30;
+            
+            heart.style.left = (x + offsetX) + 'px';
+            heart.style.top = (y + offsetY) + 'px';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 1200);
+        }
+    </script>
 </body>
 </html>
