@@ -1,422 +1,83 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NOOB SAIBOT // SYSTEM BREACH</title>
-
-<style>
-*{box-sizing:border-box}
-
-html,body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#000;
-    color:#39ff14;
-    font-family:"Courier New",monospace
-}
-
-body{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative
-}
-
-body:before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:repeating-linear-gradient(
-        0deg,
-        rgba(57,255,20,.035) 0px,
-        rgba(57,255,20,.035) 1px,
-        transparent 1px,
-        transparent 3px
-    );
-    z-index:20
-}
-
-body:after{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:radial-gradient(
-        ellipse at center,
-        transparent 25%,
-        rgba(0,0,0,.75) 100%
-    );
-    pointer-events:none;
-    z-index:19
-}
-
-.screen{
-    width:min(1000px,94%);
-    height:min(700px,90vh);
-    border:1px solid #174d17;
-    background:rgba(0,8,2,.96);
-    box-shadow:
-        0 0 10px #39ff14,
-        inset 0 0 60px rgba(0,255,50,.06);
-    padding:25px;
-    position:relative;
-    overflow:hidden
-}
-
-.header{
-    display:flex;
-    justify-content:space-between;
-    border-bottom:1px solid #164d16;
-    padding-bottom:12px;
-    font-size:12px;
-    color:#8aff7a
-}
-
-.blink{
-    animation:blink .7s infinite
-}
-
-.alert{
-    text-align:center;
-    font-size:clamp(24px,6vw,62px);
-    font-weight:bold;
-    margin:25px 0 8px;
-    color:#ff2525;
-    text-shadow:
-        0 0 5px red,
-        0 0 15px red,
-        0 0 35px red;
-    animation:glitch 1.4s infinite
-}
-
-.sub{
-    text-align:center;
-    font-size:clamp(12px,2vw,18px);
-    color:#fff;
-    letter-spacing:3px
-}
-
-.name{
-    text-align:center;
-    font-size:clamp(18px,4vw,38px);
-    margin:18px 0 15px;
-    color:#39ff14;
-    text-shadow:0 0 15px #39ff14
-}
-
-.progress-wrap{
-    margin:15px 0 25px
-}
-
-.progress-info{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:7px;
-    font-size:13px;
-    color:#8aff7a
-}
-
-.progress{
-    height:12px;
-    border:1px solid #39ff14;
-    box-shadow:0 0 12px #39ff14;
-    overflow:hidden
-}
-
-.bar{
-    height:100%;
-    width:0%;
-    background:#39ff14;
-    box-shadow:0 0 20px #39ff14;
-    transition:width .08s linear
-}
-
-.percent{
-    color:#39ff14;
-    text-shadow:0 0 8px #39ff14
-}
-
-.terminal{
-    height:260px;
-    overflow:hidden;
-    font-size:12px;
-    line-height:1.65;
-    direction:ltr;
-    text-align:left;
-    color:#62ff46
-}
-
-.line{
-    white-space:nowrap;
-    overflow:hidden;
-    animation:type .15s steps(40,end)
-}
-
-.red{
-    color:#ff3030;
-    text-shadow:0 0 8px red
-}
-
-.white{
-    color:#eee
-}
-
-.success{
-    text-align:center;
-    margin-top:18px;
-    color:#39ff14;
-    font-size:clamp(15px,3vw,25px);
-    font-weight:bold;
-    text-shadow:
-        0 0 5px #39ff14,
-        0 0 15px #39ff14,
-        0 0 30px #39ff14;
-    display:none;
-    animation:successGlow 1s infinite alternate
-}
-
-.bottom{
-    position:absolute;
-    left:25px;
-    right:25px;
-    bottom:20px;
-    border-top:1px solid #164d16;
-    padding-top:10px;
-    display:flex;
-    justify-content:space-between;
-    font-size:10px;
-    color:#397b39
-}
-
-.warning{
-    color:#ff3030;
-    animation:blink .8s infinite
-}
-
-@keyframes blink{
-    0%,45%{opacity:1}
-    46%,100%{opacity:.25}
-}
-
-@keyframes glitch{
-    0%,88%,100%{transform:translate(0)}
-    90%{transform:translate(-5px,2px)}
-    92%{transform:translate(5px,-2px)}
-    94%{transform:translate(-3px,0)}
-}
-
-@keyframes type{
-    from{width:0}
-    to{width:100%}
-}
-
-@keyframes successGlow{
-    from{
-        opacity:.65;
-        text-shadow:
-            0 0 5px #39ff14,
-            0 0 12px #39ff14
-    }
-    to{
-        opacity:1;
-        text-shadow:
-            0 0 5px #39ff14,
-            0 0 20px #39ff14,
-            0 0 35px #39ff14
-    }
-}
-
-@media(max-width:600px){
-    .screen{
-        padding:15px
-    }
-
-    .header{
-        font-size:9px
-    }
-
-    .terminal{
-        font-size:10px;
-        height:245px
-    }
-
-    .bottom{
-        left:15px;
-        right:15px
-    }
-
-    .progress-info{
-        font-size:10px
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متصمم بحب ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #1a001a, #4a0033, #000000);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: #fff;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            max-width: 500px;
+            width: 90%;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .heart {
+            font-size: 50px;
+            color: #ff3366;
+            animation: pulse 1.5s infinite;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #ff99bb;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 153, 187, 0.5);
+        }
+        .names {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+            background: linear-gradient(45deg, #ff3366, #ff99bb, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 10px;
+            line-height: 1.8;
+            padding: 10px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.2);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="screen">
-
-    <div class="header">
-        <span>NOOB-SAIBOT://ROOT_ACCESS</span>
-        <span class="blink">● CONNECTION ACTIVE</span>
-    </div>
-
-    <div class="alert" id="alert">
-        SYSTEM BREACHED
-    </div>
-
-    <div class="sub" id="sub">
-        UNAUTHORIZED ACCESS DETECTED
-    </div>
-
-    <div class="name">
-        ༺༽𝑵𝒐𝒐𝒃♕𝑺𝒂𝒊𝒃𝒐𝒕༼༻
-    </div>
-
-    <div class="progress-wrap">
-
-        <div class="progress-info">
-            <span>LOADING SYSTEM...</span>
-            <span class="percent" id="percent">0%</span>
+    <div class="card">
+        <div class="heart">❤️</div>
+        <h1>عالم يجمعنا بحب وذوق راقي</h1>
+        <div class="names">
+            𝑴؁𝑨𝑫𝑶 ♥ 『★』𝓢𝓱𝓸𝓢𝓱𝓸『★』
         </div>
-
-        <div class="progress">
-            <div class="bar" id="bar"></div>
-        </div>
-
     </div>
-
-    <div class="terminal" id="terminal"></div>
-
-    <div class="success" id="success">
-        Haxked Successfully By: Noob Saibot
-    </div>
-
-    <div class="bottom">
-        <span>ENCRYPTION: <b>DISABLED</b></span>
-        <span class="warning">⚠ SECURITY FAILURE</span>
-    </div>
-
-</div>
-
-<script>
-
-const terminal = document.getElementById("terminal");
-const bar = document.getElementById("bar");
-const percent = document.getElementById("percent");
-const success = document.getElementById("success");
-const alertText = document.getElementById("alert");
-const sub = document.getElementById("sub");
-
-const messages = [
-    ["[+] Initializing Noob Saibot protocol...",""],
-    ["[+] Establishing secure channel...",""],
-    ["[+] Authentication bypass detected.","red"],
-    ["[+] Root access requested...",""],
-    ["[+] Access level: SYSTEM","white"],
-    ["[+] Firewall status: BYPASSED","red"],
-    ["[+] Security layer: DISABLED","red"],
-    ["[+] Scanning system environment...",""],
-    ["[+] Device node detected.",""],
-    ["[+] System directories indexed.",""],
-    ["[+] User environment located.",""],
-    ["[+] Encryption keys detected.","red"],
-    ["[+] Privilege escalation: SUCCESS","red"],
-    ["[+] Kernel access: GRANTED","red"],
-    ["[+] Uploading Noob Saibot signature...",""],
-    ["[+] Shadow protocol activated.",""],
-    ["[!] SYSTEM CONTROL: 100%","red"],
-    ["[!] ALL SECURITY SERVICES TERMINATED","red"],
-    ["[+] Finalizing access...",""],
-    ["[+] Connection established.","white"]
-];
-
-let i = 0;
-
-function addLine(){
-
-    if(i >= messages.length) return;
-
-    const line = document.createElement("div");
-
-    line.className = "line " + messages[i][1];
-
-    line.textContent = messages[i][0];
-
-    terminal.appendChild(line);
-
-    terminal.scrollTop = terminal.scrollHeight;
-
-    i++;
-
-    setTimeout(
-        addLine,
-        250 + Math.random() * 500
-    );
-}
-
-setTimeout(addLine,500);
-
-
-// ==============================
-// PROGRESS SYSTEM
-// ==============================
-
-let current = 0;
-
-function updateProgress(){
-
-    if(current < 99){
-
-        current++;
-
-        bar.style.width = current + "%";
-        percent.textContent = current + "%";
-
-        // سرعة التحميل
-        setTimeout(updateProgress,65);
-
-    }else{
-
-        // توقف عند 99%
-        current = 99;
-
-        bar.style.width = "99%";
-        percent.textContent = "99%";
-
-        sub.textContent = "DEVICE CONTROL ACQUIRED";
-
-        // انتظار 5 ثوانٍ عند 99%
-        setTimeout(() => {
-
-            current = 100;
-
-            bar.style.width = "100%";
-            percent.textContent = "100%";
-
-            alertText.textContent = "ACCESS GRANTED";
-
-            success.style.display = "block";
-
-            sub.textContent = "SYSTEM ACCESS COMPLETED";
-
-        },5000);
-    }
-}
-
-setTimeout(updateProgress,500);
-
-
-// تغيير النص أثناء التحميل
-setTimeout(() => {
-    sub.textContent = "DEVICE CONTROL ACQUIRED";
-},5200);
-
-</script>
 
 </body>
-      </html>
+</html>
