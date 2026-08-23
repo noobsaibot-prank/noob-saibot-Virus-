@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NOOB SAIBOT // SYSTEM</title>
+
+<style>
+*{box-sizing:border-box}
+
+html,body{
+margin:0;
+width:100%;
+height:100%;
+overflow:hidden;
+background:#000;
+font-family:"Courier New",monospace;
+color:#39ff14
+}
+
+body{
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.screen{
+width:min(1000px,94%);
+height:min(700px,90vh);
+border:1px solid #174d17;
+background:#000802;
+box-shadow:0 0 20px #39ff14,inset 0 0 80px #001a05;
+padding:25px;
+position:relative;
+overflow:hidden
+}
+
+.scanlines{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:50;
+background:repeating-linear-gradient(
+0deg,
+rgba(57,255,20,.035) 0,
+rgba(57,255,20,.035) 1px,
+transparent 1px,
+transparent 4px
+)
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+border-bottom:1px solid #164d16;
+padding-bottom:12px;
+font-size:12px
+}
+
+.blink{
+animation:blink .7s infinite
+}
+
+.title{
+text-align:center;
+font-size:clamp(25px,6vw,60px);
+font-weight:bold;
+color:#ff2222;
+text-shadow:0 0 10px red,0 0 30px red;
+margin:30px 0 10px;
+animation:glitch 1s infinite
+}
+
+.name{
+text-align:center;
+font-size:clamp(18px,4vw,38px);
+color:#39ff14;
+text-shadow:0 0 20px #39ff14;
+margin-bottom:25px
+}
+
+.progress{
+height:16px;
+border:1px solid #39ff14;
+box-shadow:0 0 15px #39ff14;
+overflow:hidden
+}
+
+.bar{
+height:100%;
+width:0;
+background:#39ff14;
+box-shadow:0 0 25px #39ff14;
+transition:width .15s linear
+}
+
+.percent{
+text-align:center;
+font-size:20px;
+margin:12px
+}
+
+.terminal{
+direction:ltr;
+text-align:left;
+height:300px;
+overflow:hidden;
+font-size:12px;
+line-height:1.7
+}
+
+.line{
+white-space:nowrap
+}
+
+.green{color:#62ff46}
+.red{color:#ff3030;text-shadow:0 0 8px red}
+.white{color:white}
+
+.final{
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#000;
+z-index:100;
+opacity:0;
+visibility:hidden
+}
+
+.final.show{
+visibility:visible;
+opacity:1
+}
+
+.finalText{
+font-size:clamp(30px,8vw,90px);
+font-weight:bold;
+text-align:center;
+padding:20px;
+color:#39ff14;
+text-shadow:
+0 0 5px #39ff14,
+0 0 20px #39ff14,
+0 0 50px #39ff14;
+animation:finalGlitch .25s infinite
+}
+
+.final.red .finalText{
+color:#ff2020;
+text-shadow:
+0 0 5px red,
+0 0 20px red,
+0 0 50px red
+}
+
+.final.white .finalText{
+color:#fff;
+text-shadow:
+0 0 10px #fff,
+0 0 30px #39ff14
+}
+
+@keyframes blink{
+0%,45%{opacity:1}
+46%,100%{opacity:.2}
+}
+
+@keyframes glitch{
+0%,90%,100%{transform:translate(0)}
+92%{transform:translate(-5px,2px)}
+94%{transform:translate(5px,-2px)}
+96%{transform:translate(-2px,0)}
+}
+
+@keyframes finalGlitch{
+0%{transform:translate(0)}
+20%{transform:translate(-5px,2px)}
+40%{transform:translate(5px,-2px)}
+60%{transform:translate(-3px,0)}
+80%{transform:translate(3px,1px)}
+100%{transform:translate(0)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="scanlines"></div>
+
+<div class="screen" id="screen">
+
+<div class="header">
+<span>NOOB-SAIBOT://SYSTEM_ACCESS</span>
+<span class="blink">● ONLINE</span>
+</div>
+
+<div class="title">SYSTEM BREACHED</div>
+
+<div class="name">
+༺༽𝑵𝒐𝒐𝒃♕𝑺𝒂𝒊𝒃𝒐𝒕༼༻
+</div>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<div class="percent" id="percent">0%</div>
+
+<div class="terminal" id="terminal"></div>
+
+</div>
+
+<div class="final" id="final">
+<div class="finalText" id="finalText"></div>
+</div>
+
+<script>
+
+const bar=document.getElementById("bar");
+const percent=document.getElementById("percent");
+const terminal=document.getElementById("terminal");
+
+const messages=[
+"[+] Initializing Noob Saibot protocol...",
+"[+] Establishing secure connection...",
+"[+] Bypassing authentication...",
+"[+] Firewall detected...",
+"[+] Firewall bypassed.",
+"[+] Scanning system...",
+"[+] Accessing security layer...",
+"[+] Security layer disabled.",
+"[+] Requesting elevated privileges...",
+"[+] Privileges granted.",
+"[+] Encrypting connection...",
+"[+] Upload sequence initialized...",
+"[+] Processing...",
+"[+] Finalizing access...",
+"[!] ACCESS GRANTED"
+];
+
+let progress=0;
+let messageIndex=0;
+
+/* تحميل تدريجي */
+
+const loading=setInterval(()=>{
+
+progress+=Math.random()*3+1;
+
+if(progress>=100){
+
+progress=100;
+clearInterval(loading);
+
+bar.style.width="100%";
+percent.textContent="100%";
+
+setTimeout(startFinalSequence,1000);
+
+}else{
+
+bar.style.width=progress+"%";
+percent.textContent=Math.floor(progress)+"%";
+
+}
+
+/* إضافة رسائل أثناء التحميل */
+
+if(progress>messageIndex*6 && messageIndex<messages.length){
+
+const line=document.createElement("div");
+
+line.className=
+messages[messageIndex].startsWith("[!")?
+"line red":
+"line green";
+
+line.textContent=messages[messageIndex];
+
+terminal.appendChild(line);
+
+terminal.scrollTop=terminal.scrollHeight;
+
+messageIndex++;
+}
+
+},180);
+
+
+/* الرسائل النهائية */
+
+const final=document.getElementById("final");
+const finalText=document.getElementById("finalText");
+
+function showMessage(text,type,duration){
+
+final.className="final "+type;
+finalText.textContent=text;
+
+return new Promise(resolve=>{
+
+setTimeout(resolve,duration);
+
+});
+
+}
+
+async function startFinalSequence(){
+
+/* إخفاء شاشة التحميل */
+
+document.getElementById("screen").style.display="none";
+
+/* الرسالة الأولى */
+
+await showMessage(
+"HACKED SUCCESSFULLY",
+"",
+2500
+);
+
+/* الرسالة الثانية */
+
+await showMessage(
+"VIRUS UPLOADED",
+"red",
+2500
+);
+
+/* الرسالة الثالثة */
+
+await showMessage(
+"تم القرصنة بنجاح يا ڪ*سمك",
+"white",
+3000
+);
+
+/* إنهاء العرض */
+
+final.style.opacity="0";
+
+setTimeout(()=>{
+
+/*
+نقل الصفحة إلى صفحة فارغة
+بدل محاولة إغلاق تبويب المتصفح،
+لأن المتصفح يمنع المواقع من إغلاق
+تبويبات لم تفتحها بنفسها.
+*/
+
+window.location.replace("about:blank");
+
+},500);
+
+}
+
+</script>
+
+</body>
+</html>
